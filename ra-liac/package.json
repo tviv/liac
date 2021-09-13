@@ -1,0 +1,68 @@
+{
+  "name": "ra-liac",
+  "version": "0.1.0",
+  "description": "Light Access Control library for react-admin",
+  "main": "dist/index.js",
+  "module": "esm/index.js",
+  "types": "esm/index.d.ts",
+  "source": "src/index.ts",
+  "files": [
+    "LICENSE",
+    "*.md",
+    "dist",
+    "esm",
+    "src"
+  ],
+  "scripts": {
+    "build": "yarn run build-cjs && yarn run build-esm",
+    "build-cjs": "rimraf ./dist && tsc",
+    "build-esm": "rimraf ./esm && tsc --outDir esm --module es2020",
+    "watch": "yarn run tsc --outDir esm --module es2020 --watch",
+    "test": "jest --preset=ts-jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tviv/liac.git"
+  },
+  "keywords": [
+    "acl",
+    "rbac",
+    "reactjs",
+    "react",
+    "react-admin"
+  ],
+  "author": "tviv",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tviv/liac/issues"
+  },
+  "homepage": "https://github.com/tviv/liac#readme",
+  "peerDependencies": {
+    "ra-core": "^3.9.0",
+    "react": "^16.9.0 || ^17.0.0",
+    "react-dom": "^16.9.0 || ^17.0.0",
+    "react-router": "^5.1.0",
+    "react-router-dom": "^5.1.0"
+  },
+  "dependencies": {
+    "liac": "^0.1.0",
+    "lodash.filter": "^4.6.0",
+    "prop-types": "^15.6.0",
+    "ra-ui-materialui": "^3.18.1"
+  },
+  "devDependencies": {
+    "@types/history": "^4.7.9",
+    "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.172",
+    "@types/prop-types": "^15.6.0",
+    "@types/query-string": "5.1.0",
+    "@types/react-router": "^5.1.16",
+    "@types/react-router-dom": "^5.1.8",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "enzyme": "^3.11.0",
+    "jest": "^27.1.0",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.1.2"
+  }
+}

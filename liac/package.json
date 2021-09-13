@@ -1,0 +1,42 @@
+{
+	"name": "liac",
+	"version": "0.1.0",
+	"description": "light Access Control List helper for node.js projects",
+	"main": "dist/index.js",
+	"module": "esm/index.js",
+	"source": "src/index.ts",
+	"scripts": {
+		"build": "yarn run build-cjs && yarn run build-esm",
+		"build-cjs": "rimraf ./dist && tsc",
+		"build-esm": "rimraf ./esm && tsc --outDir esm --module es2020",
+		"watch": "yarn run tsc --outDir esm --module es2020 --watch",
+		"test": "jest --preset=ts-jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tviv/liac.git"
+	},
+	"keywords": [
+		"acl",
+		"node.js",
+		"js",
+		"access",
+		"permissions"
+	],
+	"author": "tviv",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/tviv/liac/issues"
+	},
+	"homepage": "https://github.com/tviv/liac#readme",
+	"devDependencies": {
+		"@types/jest": "^27.0.1",
+		"jest": "^27.1.0",
+		"rimraf": "^2.6.3",
+		"ts-jest": "^27.0.5",
+		"typescript": "^4.1.2"
+	},
+	"dependencies": {
+		"lodash.ismatch": "^4.4.0"
+	}
+}

@@ -1,0 +1,17 @@
+{
+  "name": "liac-lerna",
+  "private": true,
+  "scripts": {
+    "test": "lerna run --no-private test"
+  },
+  "workspaces": [
+    "liac",
+    "ra-liac",
+    "examples/*"
+  ],
+  "devDependencies": {
+    "jest": "^27.1.1",
+    "lerna": "^4.0.0",
+    "ts-jest": "^27.0.5"
+  }
+}

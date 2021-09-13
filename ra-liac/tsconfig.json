@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "moduleResolution": "node",
+    "outDir": "lib",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "jsx": "react-jsx"
+  },
+  "exclude": ["**/*.spec.ts","**/*.spec.tsx", "**/*.spec.js"],
+  "include": [
+    "src"
+  ]
+}
