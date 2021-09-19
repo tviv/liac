@@ -7,7 +7,7 @@
       "dom"
     ],
     "moduleResolution": "node",
-    "outDir": "lib",
+    "outDir": "dist",
     "rootDir": "src",
     "declaration": true,
     "declarationMap": true,

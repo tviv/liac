@@ -1,26 +1,31 @@
-import {Show} from "ra-ui-materialui";
+import {ShowView} from "ra-ui-materialui";
 import FilterByPermissions from "./utils/FilterByPermissions";
+import {ShowContextProvider, useCheckMinimumRequiredProps, useRedirect, useShowController} from "ra-core";
 
-/*
-const ShowWithPermissions = (({children,...props}: ShowProps & { children: ReactElement }) => {
+import useGetCanAccess from "./useGetCanAccess";
 
-    console.log('swp', children)
-    const filteredChildren = React.Children.toArray(children.props.children).filter((child) => {
-        console.log('fc', children)
-        // @ts-ignore
-        const source = child.props?.source
-        //console.log(child.props?.resource)
-        return !source || (source &&
-            useCanAccess({resource: props.resource ?? '', field: source, action: 'show'}));
-    });
+const ShowWithPermissions = props => {
+    useCheckMinimumRequiredProps('Show', ['children'], props);
+    const redirect = useRedirect();
+    const controllerProps = useShowController(props);
+    const canAccess = useGetCanAccess(props)
 
-    //const
-    //const ch = {...children,...}
+    const canShow = canAccess({record: controllerProps.record, action: 'show'})
+    if (!canShow) {
+        if (canShow === false) redirect('list', props.basePath);
+        return null
+    }
 
-    //console.dir(props.children)
-    return (<Show {...props} >{React.cloneElement(children, {...children.props, children: filteredChildren})}</Show>)
+    controllerProps.hasEdit = controllerProps.hasEdit &&
+        canAccess({record: controllerProps.record, action: 'edit'})
 
-})
-*/
+    return (
+        <ShowContextProvider value={controllerProps}>
+            <FilterByPermissions action="show">
+            <ShowView {...props} {...controllerProps} />
+            </FilterByPermissions>
+        </ShowContextProvider>
+    );
+}
 
-export default props => (<FilterByPermissions action="show"><Show {...props}/></FilterByPermissions>)
+export default ShowWithPermissions

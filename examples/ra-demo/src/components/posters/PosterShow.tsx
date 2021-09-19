@@ -2,15 +2,12 @@ import {Edit, ListProps, ShowProps, SimpleForm, SimpleShowLayout, TextField, Tex
 import {EditProps} from "ra-ui-materialui/src/types";
 import {Show} from "ra-liac";
 
-export default (props: ShowProps) => {
-
-    return (<Show {...props}>
-            <SimpleShowLayout>
-                <TextField  source="name"/>
-                <TextField  source="description"/>
-                <TextField source="comment"/>
-                <TextField  source="price"/>
-            </SimpleShowLayout>
-        </Show>
-    )
-};
+export default (props: ShowProps) => (<Show {...props}>
+        <SimpleShowLayout>
+            <TextField  source="name"/>
+            <TextField  source="description"/>
+            <TextField source="comment"/>
+            <TextField  source="price"/>
+        </SimpleShowLayout>
+    </Show>
+)

@@ -8,13 +8,14 @@ type RequestedAccessAsScope = {scope: string}
 
 export type RequestedAccess = RequestedAccessAsResource  | RequestedAccessAsScope
 
-const checkRules: ['fields' | 'records', 'field' | 'record', (o:any[], v:any)=>boolean][] = [
-    ['fields', 'field', (o: string[], v: string) => o?.includes(v)],
-    ['records', 'record', (o: object[], v: object) => o?.every(x => isMatch(v, x))]
-    ]
+const checkRules: {whereName:'fields' | 'records', whatName: 'field' | 'record', fn: (o:any[], v:any)=>boolean}[] = [
+    {whereName: 'fields', whatName: 'field', fn: (o: string[], v: string) => o?.includes(v)},
+    {whereName: 'records', whatName: 'record', fn: (o: object[], v: object) => o?.some(x => isMatch(v, x))}
+]
 
 export default (castAppPerms2NativePerms: (resource: string, source: any) => NativePermissions
                     = convert2ResourcePermissionsDefault) => {
+    // noinspection UnnecessaryLocalVariableJS
     const canAccess = (
         permissions: any | NativePermissions | NativePermissionsMap | undefined,
         requestedAccess: RequestedAccess
@@ -44,9 +45,9 @@ export default (castAppPerms2NativePerms: (resource: string, source: any) => Nat
                     const ac = actionContent
 
                     checkRules.forEach(x => {
-                        if (!and) checkScopesResults.push(ac[x[0]] && !ra[x[1]] ? false : undefined)
-                        checkScopesResults.push(ac[x[0]] && ra[x[1]]
-                            ? x[2](ac[x[0]] as any[], ra[x[1]]) : undefined)
+                        if (!and) checkScopesResults.push(ac[x.whereName] && !ra[x.whatName] ? false : undefined)
+                        checkScopesResults.push(ac[x.whereName] && ra[x.whatName]
+                            ? x.fn(ac[x.whereName] as any[], ra[x.whatName]) : undefined)
                     })
                     /*
                                     if (!and) checkScopesResults.push(actionContent.fields && !ra.field ? false : undefined)
@@ -64,8 +65,6 @@ export default (castAppPerms2NativePerms: (resource: string, source: any) => Nat
 
                 return and ? a && x : a || x
             }, undefined)
-
-            //console.log(permissions, castAppPerms2NativePerms(resource, permissions)), ra, actionContent, checkScopesResult)
 
             return !!actionContent && checkScopesResult !== false
             //return actionsWithContent.some(x=>x) && checkScopesResult !== false

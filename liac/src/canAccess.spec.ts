@@ -186,6 +186,33 @@ describe('canAccess tests - with records', () => {
         )
         expect(result).toEqual(false)
     })
+    it('resource, all actions, two records = same resource, predefined action', () => {
+        const permission = [
+            {resource: 'posters', actions: 'show'},
+            {resource: 'posters', records: {userId: 2}, actions: 'edit'},
+            {resource: 'posters', records: {userId: 3}, actions: 'edit'},
+        ]
+
+        expect(canAccess(permission,{resource: 'posters', record: {userId: 1}, action: 'edit'}))
+            .toEqual(false)
+        expect(canAccess(permission,{resource: 'posters', record: {userId: 3}, action: 'edit'}))
+            .toEqual(true)
+    })
+})
+
+describe('canAccess tests - with fields and records', () => {
+    it('resource, allowed one action, denied tow fields, and allowed one record = no showing denied fields and only one record is allowed to edit (excluding two fields)', () => {
+        const permission = [
+            {resource: 'posters', actions: 'show'},
+            {resource: 'posters', records: {userId: 2}, actions: 'edit'},
+            {resource: 'posters', fields: 'comments, price', actions: '-show'},
+        ]
+
+        expect(canAccess(permission,{resource: 'posters', record: {userId: 1}, action: 'edit'}))
+            .toEqual(false)
+        expect(canAccess(permission,{resource: 'posters', record: {userId: 2}, action: 'edit'}))
+            .toEqual(true)
+    })
 })
 
 describe('canAccess tests - request access as scope', () => { //scopes are liked resources only without fields, records, and action has only one value = 'enabled'

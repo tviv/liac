@@ -3,16 +3,14 @@ import React, {Children} from "react";
 import {DeleteButton, SaveButton} from "ra-ui-materialui";
 import {makeStyles} from "@material-ui/core/styles";
 import useCanAccess from "./useCanAccess";
+import {useRecordContext, useResourceContext} from "ra-core";
 
-const Toolbar2 = (props: ToolbarProps) => {
-    const toolbar = (<Toolbar {...props}/>)
-    console.dir(toolbar)
-    return toolbar
-}
 
 const ToolbarWithPermissions = ({children,...props}: ToolbarProps) => {
 
-    const canDelete = useCanAccess({action: 'delete', resource: props.resource ?? ''})
+    const record = useRecordContext()
+    const resource = useResourceContext(props)
+    const canDelete = useCanAccess({record, resource, action: 'delete'})
 
     if (Children.count(children) === 0) {
         const useStyles = makeStyles(

@@ -1,17 +1,14 @@
-import {usePermissions} from "ra-core";
 import {useMemo} from "react";
-import {RequestedAccess, canAccessFactory } from "liac";
-const canAccess = canAccessFactory()
+import {RequestedAccess} from "liac";
+import useGetCanAccess from "./useGetCanAccess";
 
 const useCanAccess = (askedPermission: RequestedAccess | undefined) => {
 
-    const {permissions} = usePermissions();
+    const canAccess = useGetCanAccess()
 
     return useMemo(
-        () => {
-            return !askedPermission || canAccess(permissions, askedPermission)
-        },
-        [permissions, askedPermission])
+        () => canAccess && canAccess(askedPermission),
+        [canAccess, askedPermission])
 };
 
 export default useCanAccess;

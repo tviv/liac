@@ -1,48 +1,37 @@
+const permissions = {
+    admin: {
+        userId: '1',
+        userName: 'Jhon Smith',
+        permissions: [{actions: '*', resource: '*'}]
+    },
+    reader: {
+        userId: '3',
+        userName: 'Izy Rain1',
+        permissions: [{resource: '*', actions: 'show'}]
+    },
+    corrector: {
+        userId: '2',
+        userName: 'C Corrector',
+        permissions: [
+            {resource: 'posters', actions: '*,-delete'},
+            {resource: 'posters', fields: 'price', actions: '-show'}
+        ]
+    },
+    user: {
+        userId: '4',
+        userName: 'U User',
+        permissions: [
+            {resource: 'posters', actions: 'show'},
+            {resource: 'posters', records: {id: 2}, actions: 'edit, delete'},
+            {resource: 'posters', records: {id: 3}, actions: 'edit'},
+            {resource: 'posters', fields: 'comments, price', actions: '-show'},
+        ]
+    },
+}
+
 export default {
     login: ({ username }) => {
-        let info;
-        switch (username) {
-            case 'admin':
-                info = {
-                    userId: '1',
-                    userName: 'Jhon Smith',
-                    role: 'admin',
-                    permissions: [{actions: '*', resource: '*'}]
-                }
-                break;
-
-            case 'corrector':
-                info = {
-                    userId: '2',
-                    userName: 'C Corrector',
-                    role: 'corrector',
-                    permissions: [
-                        {resource: 'posters', actions: '*,-delete'},
-                        {resource: 'posters', fields: 'price', actions: '-show'}
-                    ]
-                }
-                break;
-
-            case 'reader':
-                info = {
-                    userId: '3',
-                    userName: 'Izy Rain1',
-                    role: 'reader',
-                    permissions: [{resource: '*', actions: 'show'}]
-                }
-                break;
-            case 'user':
-                info = {
-                    userId: '4',
-                    userName: 'U User',
-                    role: 'user',
-                    permissions: [
-                        {resource: 'posters', actions: 'show'},
-                        {resource: 'posters', fields: 'price', actions: '-show'},
-                    ]
-                }
-                break;
-        }
+        const info = permissions[username];
 
         if (info) {
             localStorage.setItem('userId', info.userId);

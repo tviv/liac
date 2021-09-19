@@ -46,7 +46,6 @@
   },
   "dependencies": {
     "liac": "^0.1.0",
-    "lodash.filter": "^4.6.0",
     "prop-types": "^15.6.0",
     "ra-ui-materialui": "^3.18.1"
   },
