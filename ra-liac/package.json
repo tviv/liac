@@ -16,8 +16,8 @@
   "scripts": {
     "build": "yarn run build-cjs && yarn run build-esm",
     "build-cjs": "rimraf ./dist && tsc",
-    "build-esm": "rimraf ./esm && tsc --outDir esm --module es2020",
-    "watch": "yarn run tsc --outDir esm --module es2020 --watch",
+    "build-esm": "rimraf ./esm && tsc --outDir esm --module esnext",
+    "watch": "yarn run tsc --outDir esm --module esnext --watch",
     "test": "jest --preset=ts-jest"
   },
   "repository": {

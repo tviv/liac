@@ -1,29 +1,39 @@
-import {Resource, ResourceProps} from "ra-core";
-import React from "react";
-import FilterByPermissions from "./utils/FilterByPermissions";
-import useCanAccess from "./useCanAccess";
-const ResourceWithPermission = ({name: resourceName, edit, list, show, create, ...props}:ResourceProps) => {
+import {
+    Resource, ResourceProps,
+} from "ra-core";
+import React, {FunctionComponent} from "react";
 
-    const access = {
-        list: useCanAccess({action: 'show', resource: resourceName}),
-        create: useCanAccess({action: 'create', resource: `${resourceName}`}),
-        edit: useCanAccess({action: 'edit', resource: `${resourceName}`}),
-        show: useCanAccess({action: 'show', resource: `${resourceName}`}),
+import useGetCanAccess from "./useGetCanAccess";
+
+const emptyComponent = () => {
+    return null
+}
+
+const ResourceWithPermission: FunctionComponent<ResourceProps> = (
+    {
+        edit, list, show, create,
+        ...props
+    }
+) => {
+    const canAccess = useGetCanAccess({resource: props.name})
+    const routes = {
+        list: canAccess({action: 'show'}) ? list : undefined,
+        create: canAccess({action: 'create'}) ? create : undefined,
+        edit: canAccess({action: 'edit'}) ? edit : undefined,
+        show: canAccess({action: 'show'}) ? show : undefined,
     };
 
-
-
-
-    return (
+    //emptyComponent to handle check on authenticated on starting site
+    return (props.intent === 'registration' ? (
         <Resource
-            name={resourceName}
-            list={access.list ? list : undefined}
-            edit={access.edit ? edit : undefined}
-            show={access.show ? show: undefined}
-            create={access.create ? create : undefined}
-
-            {...props}/>
-    )
+            {...routes}
+            {...props} />
+    ) : (
+        <Resource
+            {...routes}
+            list={routes.list ?? emptyComponent}
+            {...props} />
+    ));
 }
 
 export default ResourceWithPermission

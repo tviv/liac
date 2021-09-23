@@ -2,6 +2,7 @@
   "name": "liac-lerna",
   "private": true,
   "scripts": {
+    "build": "lerna run build",
     "test": "lerna run --no-private test"
   },
   "workspaces": [

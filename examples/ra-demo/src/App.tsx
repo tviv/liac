@@ -7,15 +7,13 @@ import LoginPage from "./components/layout/LoginPage";
 import posters from './components/posters';
 import clients from './components/clients';
 
-
-
-const App = () => (
+const App = () =>  (
     <Admin
         dataProvider={dataProvider}
         authProvider={authProvider}
         loginPage={LoginPage}
     >
-      <Resource name="posters" {...posters} />
+        <Resource name="posters" {...posters} />
         <Resource name="clients" {...clients} />
     </Admin>
 );

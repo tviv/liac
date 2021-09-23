@@ -1,4 +1,4 @@
-import {EditView} from "ra-ui-materialui";
+import {EditView, SimpleForm} from "ra-ui-materialui";
 import FilterByPermissions from "./utils/FilterByPermissions";
 import Toolbar from "./Toolbar";
 import {EditContextProvider, useCheckMinimumRequiredProps, useEditController,useRedirect} from "ra-core";
@@ -8,8 +8,9 @@ import useCanAccess from "./useCanAccess";
 
 export default props => {
 
-    // let  injectedChildren = children
-    if (props.children?.type?.name === 'SimpleForm') {
+    // let's think that child is SimpleForm
+    // noinspection RequiredAttributes
+    if (props.children?.type?.name === (<SimpleForm><></></SimpleForm>).type.name) {
         const toolbar = props.children.toolbar || (<Toolbar/>)
         let children = {...props.children, props: {...props.children.props, toolbar}}
         props = {...props, children}

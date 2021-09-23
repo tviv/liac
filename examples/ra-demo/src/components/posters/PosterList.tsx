@@ -1,5 +1,5 @@
 import * as React from "react";
-import {EditButton, ListProps, ShowButton, TextField, Datagrid, SimpleList} from "react-admin";
+import {TextField, Datagrid, EditButton} from "react-admin";
 
 import {PostListActionToolbar} from "ra-liac";
 import {List} from "ra-liac";

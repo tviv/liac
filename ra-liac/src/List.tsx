@@ -1,4 +1,4 @@
-import {List} from "ra-ui-materialui";
+import {EditButton, List} from "ra-ui-materialui";
 import FilterByPermissions from "./utils/FilterByPermissions";
 import {
     useRecordContext,
@@ -7,6 +7,7 @@ import {
 import * as React from "react";
 import replaceChildren from "./utils/replaceChildren";
 import useCanAccess from "./useCanAccess";
+const editButtonType = React.createElement(EditButton).type;
 
 const WrappedEditButton = ({children,...props}) => {
 
@@ -22,7 +23,9 @@ export default (props) => {
 
     //the edit button only if there is permission or hasEdit
     const children = replaceChildren(props.children,
-        child=>typeof child?.type !== 'string' && child?.type?.name === 'EditButton',
+        child=> {
+            return typeof child?.type !== 'string' && child.type?.name === editButtonType.name
+        },
         child=> props.hasEdit ? (<WrappedEditButton>{child}</WrappedEditButton>) : null
     )
 

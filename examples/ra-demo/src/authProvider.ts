@@ -36,7 +36,6 @@ export default {
         if (info) {
             localStorage.setItem('userId', info.userId);
             localStorage.setItem('userName', info.userName);
-            localStorage.setItem('role', info.role);
             localStorage.setItem('permissions', JSON.stringify(info.permissions));
             return Promise.resolve()
         }
@@ -44,17 +43,31 @@ export default {
         return Promise.reject()
     },
     logout: () => {
-        localStorage.removeItem('userId');
-        localStorage.removeItem('userName');
+        clearUserInfo();
         return Promise.resolve();
     },
     checkError: () => Promise.resolve(),
-    checkAuth: () =>
-        localStorage.getItem('userName') ? Promise.resolve() : Promise.reject(),
-    getPermissions: () => Promise.resolve(JSON.parse(localStorage.getItem('permissions') || '[]')),
+    checkAuth: () => {
+        if (localStorage.getItem('userName') && localStorage.getItem('permissions')) {
+            return Promise.resolve()
+        } else {
+            clearUserInfo();
+            return Promise.reject();
+        }
+    },
+    getPermissions: () => {
+        const perms = localStorage.getItem('permissions')
+        return perms ? Promise.resolve(JSON.parse(perms)) : Promise.reject()
+    },
     getIdentity: () =>
         Promise.resolve({
             id: localStorage.getItem('userId') ?? '',
             fullName: localStorage.getItem('userName') ?? ''
         }),
 };
+
+const clearUserInfo = () => {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('permissions');
+}

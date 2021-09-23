@@ -1,10 +1,9 @@
 import {Action, FIELD_ACTIONS, PermissionType, NativePermissions, NativePermissionScope} from "./NativePermissions";
-
 export type Permission = {
     resource: string,
     records?: object[] | object
     fields?: string[] | string
-    actions: Array<Action | '*'> | string,
+    actions: Array<Action | '*' | string> | string,
     type?: PermissionType //by default allow (deny can be repleaced by adding "-" symbol at beginning of action in actions
 }
 
@@ -58,10 +57,8 @@ export default (resource: string, permissions: Permission[]): NativePermissions 
         }))
         .map(x => ({...x, records: !x.records ? [] : Array.isArray(x.records) ? x.records : [x.records]}))
 
-
     const allowed = normalizeByType('allow', filteredByResourceAndStringsAsArrays)
     const denied = normalizeByType('deny', filteredByResourceAndStringsAsArrays)
-
 
     return {...allowed, ...denied};
 }
