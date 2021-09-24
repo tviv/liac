@@ -170,7 +170,7 @@ const Login = ({theme, ...props}) => {
                                 </div>
                                 <div className={classes.hint}>
                                     admin   - full rights<br/>
-                                    corrector   - can't delete, can't see Users<br/>
+                                    corrector   - can't delete, can't see Users, doesn't see Price in Posters<br/>
                                     reader   - only reading<br/>
                                     user    - sees Posters exluding Price, can change 2 records and delete one<br/>
                                 </div>
