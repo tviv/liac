@@ -1,4 +1,4 @@
-const permissions = {
+export const permissions = {
     admin: {
         userId: '1',
         userName: 'Jhon Smith',
