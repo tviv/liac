@@ -1,6 +1,6 @@
 {
   "name": "ra-liac",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Light Access Control library for react-admin",
   "main": "dist/index.js",
   "module": "esm/index.js",
@@ -29,7 +29,8 @@
     "rbac",
     "reactjs",
     "react",
-    "react-admin"
+    "react-admin",
+    "rbac"
   ],
   "author": "tviv",
   "license": "MIT",

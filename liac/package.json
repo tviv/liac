@@ -1,6 +1,6 @@
 {
 	"name": "liac",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "light Access Control List helper for node.js projects",
 	"main": "dist/index.js",
 	"module": "esm/index.js",
