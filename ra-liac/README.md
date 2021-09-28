@@ -1,5 +1,5 @@
 ## ra-liac
-Framework for [react-admin] (https://marmelab.com/react-admin) to manage basic views access based on pre-defined permissions ([live demo](https://tviv.github.io/ra-demo)).
+Framework for [react-admin](https://marmelab.com/react-admin) to manage basic views access based on pre-defined permissions ([live demo](https://tviv.github.io/ra-demo)).
 
 ### Getting Started
 ra-liac is available from npm.

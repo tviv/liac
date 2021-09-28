@@ -1,5 +1,5 @@
 # liac
-Light Access Control for js projects. It was heavily inspired by [ra-auth-acl](https://github.com/marmelab/ra-auth-acl) and [ra-access-control-lists] (https://github.com/andrico1234/ra-access-control-lists).
+Light Access Control for js projects. It was heavily inspired by [ra-auth-acl](https://github.com/marmelab/ra-auth-acl) and [ra-access-control-lists](https://github.com/andrico1234/ra-access-control-lists).
 
 Check out [demo](https://tviv.github.io/ra-demo) with using the react-admin framework.
 
@@ -54,12 +54,12 @@ For permissions from the first example earlier, the "canAccess" might have the f
 canAccess(permissions, {resource: 'posts', action:'show'}) //returns 'true'
 canAccess(permissions, {resource: 'users', action:'show'}) //returns 'false'
 ```
-By the way, shorthand form can be like ({scope: string, action: string}).
+By the way, the shorthand form can as follows: ```{scope: string}``` (here the default action is 'enable').
 
 In this library, access is granted based on permissions. There is no difficulty in using this in the role model (RBAC), because the basis remains the same.
 ## Other library where liac is used
 ### ra-liac
-Framework for [react-admin] (https://marmelab.com/react-admin) to manage basic views access based on pre-defined permissions ([live demo](https://tviv.github.io/ra-demo)).
+Framework for [react-admin](https://marmelab.com/react-admin) to manage basic views access based on pre-defined permissions ([live demo](https://tviv.github.io/ra-demo)).
 
 #### Getting Started
 ra-liac is available from npm.
